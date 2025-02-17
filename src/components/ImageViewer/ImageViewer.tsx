@@ -1,11 +1,11 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import OpenSeadragon from 'openseadragon';
 import ams1 from "../../assets/ams1.jpg";
 import ams2 from "../../assets/ams2.jpg";
 
 const OpenSeaViewerApp = () => {
 	const viewerRef = useRef(null);
-	const viewerInstance = useRef(null);
+	const viewerInstance = useRef<OpenSeadragon.Viewer | null>(null);
 	
 	// Array of image URLs
 	const images = [
@@ -18,7 +18,7 @@ const OpenSeaViewerApp = () => {
 	// Initialize OpenSeadragon only once when the component mounts
 	useEffect(() => {
 		viewerInstance.current = OpenSeadragon({
-		element: viewerRef.current,
+		element: viewerRef.current as unknown as HTMLElement,
 		prefixUrl: 'https://openseadragon.github.io/openseadragon/images/',
 		crossOriginPolicy: 'Anonymous',
 		tileSources: {
